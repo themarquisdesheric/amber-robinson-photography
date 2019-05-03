@@ -10,6 +10,7 @@ import PropTypes from 'prop-types';
 import { StaticQuery, graphql } from 'gatsby';
 
 import Header from './header';
+import './reset.css';
 import './layout.css';
 
 const Layout = ({ children }) => (
@@ -24,24 +25,13 @@ const Layout = ({ children }) => (
       }
     `}
     render={data => (
-      <>
+      <div className="layout flex flex-col">
         <Header siteTitle={data.site.siteMetadata.title} />
-        <div
-          style={{
-            margin: `0 auto`,
-            maxWidth: 960,
-            padding: `0px 1.0875rem 1.45rem`,
-            paddingTop: 0
-          }}
-        >
-          <main>{children}</main>
-          <footer>
-            © {new Date().getFullYear()}, Built with
-            {` `}
-            <a href="https://www.gatsbyjs.org">Gatsby</a>
-          </footer>
-        </div>
-      </>
+        <main className="px-2 sm:px-4">{children}</main>
+        <footer className="bg-black h-8 flex justify-center items-center text-xs sm:text-sm">
+          © {new Date().getFullYear()} Amber Robinson Photography
+        </footer>
+      </div>
     )}
   />
 );
