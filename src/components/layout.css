@@ -1,10 +1,8 @@
+body { font-family: sans-serif; }
+
 header a, 
-footer {
-  color: white;
-}
+footer { color: white; }
 
 a { text-decoration: none; }
 
-.layout > main {
-  min-height: calc(100vh - 3rem - 2rem);
-}
+.layout > main { min-height: calc(100vh - 3rem - 2rem); }
