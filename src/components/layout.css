@@ -5,4 +5,31 @@ footer { color: white; }
 
 a { text-decoration: none; }
 
+nav a { border-bottom: 2px solid transparent; }
+
+nav a:hover {
+  border-bottom: 2px solid white;
+  transition: 300ms;
+}
+
+h1 svg { width: 150px; }
+
+.hamburger {
+  height: 4px;
+  margin: 5px .5rem;
+}
+
+.hamburger-list {
+  border-radius: 5px;
+  top: 2rem;
+  right: .5rem;
+  background: rgba(0, 0, 0, .75);
+}
+
 .layout > main { min-height: calc(100vh - 3rem - 2rem); }
+
+@media all and (min-width: 575px) {
+  .hamburger-list {
+    background: none;
+  }
+}
