@@ -3,6 +3,7 @@ import { Link } from 'gatsby';
 import PropTypes from 'prop-types';
 
 import Signature from '../images/signature.svg';
+import Menu from '../images/menu.svg';
 
 const links = ['portfolio', 'about', 'contact'];
 
@@ -23,9 +24,11 @@ const NavLinks = ({ visible }) =>
 // TODO: create galleries programmatically
 
 const HamburgerMenu = ({ className, handleSetVisible }) => 
-  <div onClick={() => handleSetVisible(visible => !visible)} className={className}>
-    {/* replace with asset when available */}
-    {[1,2,3].map(num => <div className="hamburger w-8 bg-black" key={num} />)}
+  <div 
+    onClick={() => handleSetVisible(visible => !visible)} 
+    className={`mr-2 h-6 ${className}`}
+  >
+    <Menu />
   </div>;
 
 const Header = () => {
