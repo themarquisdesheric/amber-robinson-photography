@@ -1,10 +1,31 @@
+body { font-family: sans-serif; }
+
 header a, 
-footer {
-  color: white;
-}
+footer { color: white; }
 
 a { text-decoration: none; }
 
-.layout > main {
-  min-height: calc(100vh - 3rem - 2rem);
+nav a { border-bottom: 2px solid transparent; }
+
+nav a:hover {
+  border-bottom: 2px solid white;
+  transition: 300ms;
+}
+
+h1 svg { width: 150px; }
+
+.hamburger-list {
+  border-radius: 5px;
+  top: 2rem;
+  right: .5rem;
+  background: rgba(0, 0, 0, .75);
+  z-index: 5000;
+}
+
+.layout > main { min-height: calc(100vh - 3rem - 2rem); }
+
+@media all and (min-width: 575px) {
+  .hamburger-list {
+    background: none;
+  }
 }
