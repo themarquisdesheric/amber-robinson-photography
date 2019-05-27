@@ -3,7 +3,7 @@ import { graphql } from 'gatsby';
 
 import Layout from '../components/layout';
 import SEO from '../components/seo';
-import KEYWORDS from '../keywords';
+import KEYWORDS from '../general-keywords';
 
 // we can't access context (for the slug) via useStaticQuery
 // so we need to export the query as a named export so gatsby can pick it up

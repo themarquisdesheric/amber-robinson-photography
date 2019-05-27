@@ -3,7 +3,7 @@ import { Link, useStaticQuery, graphql } from 'gatsby';
 
 import Layout from '../components/layout';
 import SEO from '../components/seo';
-import KEYWORDS from '../keywords';
+import KEYWORDS from '../general-keywords';
 
 const Blog = () => {
   const { allMarkdownRemark: { edges } } = useStaticQuery(graphql`
