@@ -1,27 +1,49 @@
 import React, { useState } from 'react';
-import { Link } from 'gatsby';
+import { Link, useStaticQuery, graphql } from 'gatsby';
 import PropTypes from 'prop-types';
 
 import Signature from '../images/signature.svg';
 import Menu from '../images/menu.svg';
 
-const links = ['portfolio', 'about', 'contact'];
 
-const NavLinks = ({ visible }) => 
-  <div className={`hamburger-list flex-col p-1 absolute ${visible ? 'flex' : 'hidden'} sm:flex sm:flex-row sm:static`}>
-    {links.map(link => 
-      <Link 
-        to={`/${link}`}
-        className="uppercase sm:inline sm:mr-4 sm:text-black"
-        key={link}
-      >
-        {link}
-      </Link>  
-    )}
-  </div>;
+const NavLinks = ({ visible }) => {
+  const links = ['portfolio', 'about', 'contact'];
+  const { allMarkdownRemark: { edges } } = useStaticQuery(graphql`
+    query {
+      allMarkdownRemark {
+        edges {
+          node {
+            frontmatter {
+              title
+            }
+          }
+        }
+      }  
+    }
+  `);
 
-// TODO: create pages programmatically
+  if (edges.length) {
+    // only show blog link if blog entries exist
+    links.splice(1, 0, 'blog');
+  }
+  
+  return (
+    <div className={`hamburger-list flex-col p-1 absolute ${visible ? 'flex' : 'hidden'} sm:flex sm:flex-row sm:static`}>
+      {links.map(link => 
+        <Link 
+          to={`/${link}`}
+          className="uppercase sm:inline sm:mr-4 sm:text-black"
+          key={link}
+        >
+          {link}
+        </Link>  
+      )}
+    </div>
+  );
+};
+
 // TODO: create galleries programmatically
+// TODO: proptypes
 
 const HamburgerMenu = ({ className, handleSetVisible }) => 
   <div 

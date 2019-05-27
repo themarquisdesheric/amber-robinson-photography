@@ -1,1 +1,2 @@
-export default ['photography', 'food photography'];
+// general keywords
+export default ['photography', 'amber robinson photography'];
