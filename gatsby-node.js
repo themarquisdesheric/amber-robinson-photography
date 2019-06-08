@@ -16,7 +16,7 @@ module.exports.createPages = async ({ graphql, actions: { createPage } }) => {
   const Blog = path.resolve('./src/templates/blog.js');
 
   const { data: { allMarkdownRemark: { edges } } } = await graphql(`
-    query {
+    query slugQuery {
       allMarkdownRemark {
         edges {
           node {

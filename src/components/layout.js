@@ -1,10 +1,3 @@
-/**
- * Layout component that queries for data
- * with Gatsby's StaticQuery component
- *
- * See: https://www.gatsbyjs.org/docs/static-query/
- */
-
 import React from 'react';
 import PropTypes from 'prop-types';
 import { useStaticQuery, graphql } from 'gatsby';
@@ -13,21 +6,25 @@ import Header from './header';
 import './reset.css';
 import './layout.css';
 
-const Layout = ({ children }) => {
-  const { site: { siteMetadata: { title = '' } } } = useStaticQuery(graphql`
-    query SiteTitleQuery {
-      site {
-        siteMetadata {
-          title
-        }
+const SITE_TITLE_QUERY = graphql`
+  query SiteTitleQuery {
+    site {
+      siteMetadata {
+        title
       }
     }
-  `);
+  }
+`;
+
+const Layout = ({ children, splashPage }) => {
+  const { site: { siteMetadata: { title = '' } } } = useStaticQuery(SITE_TITLE_QUERY);
 
   return (
     <div className="layout flex flex-col">
       <Header siteTitle={title} />
-      <main className="px-2 sm:px-4">{children}</main>
+      <main className={splashPage ? 'splash' : 'px-2 sm:px-4'}>
+        {children}
+      </main>
       <footer className="bg-black h-8 flex justify-center items-center text-xs sm:text-sm">
         © {new Date().getFullYear()} {title}
       </footer>
@@ -36,7 +33,8 @@ const Layout = ({ children }) => {
 };
 
 Layout.propTypes = {
-  children: PropTypes.node.isRequired
+  children: PropTypes.node.isRequired,
+  splashPage: PropTypes.bool
 };
 
 export default Layout;

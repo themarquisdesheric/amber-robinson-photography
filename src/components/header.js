@@ -5,22 +5,23 @@ import PropTypes from 'prop-types';
 import Signature from '../images/signature.svg';
 import Menu from '../images/menu.svg';
 
-
-const NavLinks = ({ visible }) => {
-  const links = ['portfolio', 'about', 'contact'];
-  const { allMarkdownRemark: { edges } } = useStaticQuery(graphql`
-    query {
-      allMarkdownRemark {
-        edges {
-          node {
-            frontmatter {
-              title
-            }
+const TITLE_QUERY = graphql`
+  query TitleQuery {
+    allMarkdownRemark {
+      edges {
+        node {
+          frontmatter {
+            title
           }
         }
-      }  
-    }
-  `);
+      }
+    }  
+  }
+`;
+
+const NavLinks = ({ visible }) => {
+  const { allMarkdownRemark: { edges } } = useStaticQuery(TITLE_QUERY);
+  const links = ['portfolio', 'about', 'contact'];
 
   if (edges.length) {
     // only show blog link if blog entries exist

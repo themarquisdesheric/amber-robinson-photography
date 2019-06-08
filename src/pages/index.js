@@ -6,11 +6,9 @@ import SEO from '../components/seo';
 import KEYWORDS from '../general-keywords';
 
 const IndexPage = () => (
-  <Layout>
+  <Layout splashPage={true}>
     <SEO title="Home" keywords={KEYWORDS} />
-    <div className="mt-4">
-      <Image />
-    </div>
+    <Image />
   </Layout>
 );
 

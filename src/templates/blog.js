@@ -21,7 +21,7 @@ export const query = graphql`
 
 const Blog = ({ data: { markdownRemark: { html, frontmatter: { keywords } } } }) => (
   <Layout>
-    <SEO title="Blog" keywords={[...KEYWORDS, keywords]} /> 
+    <SEO title="Blog" keywords={[...KEYWORDS, ...keywords]} /> 
     <div dangerouslySetInnerHTML={{ __html: html }} />
   </Layout>
 );

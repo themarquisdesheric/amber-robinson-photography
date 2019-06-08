@@ -5,25 +5,27 @@ import Layout from '../components/layout';
 import SEO from '../components/seo';
 import KEYWORDS from '../general-keywords';
 
-const Blog = () => {
-  const { allMarkdownRemark: { edges } } = useStaticQuery(graphql`
-    query {
-      allMarkdownRemark {
-        edges {
-          node {
-            html
-            fields {
-              slug
-            }
-            frontmatter {
-              title
-              date
-            }
+const BLOG_QUERY = graphql`
+  query BlogQuery {
+    allMarkdownRemark {
+      edges {
+        node {
+          html
+          fields {
+            slug
+          }
+          frontmatter {
+            title
+            date
           }
         }
-      }  
-    }
-  `);
+      }
+    }  
+  }
+`;
+
+const Blog = () => {
+  const { allMarkdownRemark: { edges } } = useStaticQuery(BLOG_QUERY);
 
   return (
     <Layout>

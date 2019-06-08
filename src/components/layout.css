@@ -22,7 +22,12 @@ h1 svg { width: 150px; }
   z-index: 5000;
 }
 
-.layout > main { min-height: calc(100vh - 3rem - 2rem); }
+.layout > main { min-height: calc(100vh - 4rem); }
+
+.splash > div > div {
+  padding-bottom: 0 !important;
+  height: calc(100vh - 4rem);
+}
 
 @media all and (min-width: 575px) {
   .hamburger-list {
