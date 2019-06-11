@@ -22,10 +22,10 @@ const Layout = ({ children, splashPage }) => {
   return (
     <div className="layout flex flex-col">
       <Header siteTitle={title} />
-      <main className={splashPage ? 'splash' : 'px-2 sm:px-4'}>
+      <main className={splashPage ? 'splash' : 'px-5 sm:px-24'}>
         {children}
       </main>
-      <footer className="bg-black h-8 flex justify-center items-center text-xs sm:text-sm">
+      <footer className="h-8 flex justify-center items-center text-xs sm:text-sm">
         © {new Date().getFullYear()} {title}
       </footer>
     </div>

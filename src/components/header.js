@@ -19,6 +19,8 @@ const TITLE_QUERY = graphql`
   }
 `;
 
+// * do dropdown mobile menu with different colored background and with it overlaying the page instead of disrupting the flow
+
 const NavLinks = ({ visible }) => {
   const { allMarkdownRemark: { edges } } = useStaticQuery(TITLE_QUERY);
   const links = ['portfolio', 'about', 'contact'];
@@ -27,13 +29,13 @@ const NavLinks = ({ visible }) => {
     // only show blog link if blog entries exist
     links.splice(1, 0, 'blog');
   }
-  
+
   return (
     <div className={`hamburger-list flex-col p-1 absolute ${visible ? 'flex' : 'hidden'} sm:flex sm:flex-row sm:static`}>
-      {links.map(link => 
+      {links.map((link, idx) => 
         <Link 
           to={`/${link}`}
-          className="uppercase sm:inline sm:mr-4 sm:text-black"
+          className={`uppercase sm:inline sm:text-black ${(idx + 1 === links.length) ? '' : 'sm:mr-4'}`}
           key={link}
         >
           {link}
@@ -49,23 +51,23 @@ const NavLinks = ({ visible }) => {
 const HamburgerMenu = ({ className, handleSetVisible }) => 
   <div 
     onClick={() => handleSetVisible(visible => !visible)} 
-    className={`mr-2 h-6 ${className}`}
+    className="hamburger-menu h-6"
   >
     <Menu />
   </div>;
 
 const Header = () => {
   const [visible, setVisible] = useState(false);
-  
+
   return (
-    <header className="flex items-center justify-between border-b border-solid border-black h-16">
-      <h1 className="text-xl sm:text-2xl m-0 px-2 sm:px-4">
+    <header className="flex items-center justify-between border-b border-solid border-black h-16 px-5 sm:px-24">
+      <h1 className="text-xl sm:text-2xl m-0">
         <Link to="/">
           <Signature />
         </Link>
       </h1>
       <nav className="text-xs relative">
-        <HamburgerMenu className="sm:hidden" visible={visible} handleSetVisible={setVisible} />
+        <HamburgerMenu visible={visible} handleSetVisible={setVisible} />
         <NavLinks visible={visible} />
       </nav>
     </header>

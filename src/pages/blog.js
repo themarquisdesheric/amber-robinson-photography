@@ -7,10 +7,12 @@ import KEYWORDS from '../general-keywords';
 
 const BLOG_QUERY = graphql`
   query BlogQuery {
-    allMarkdownRemark {
+    allMarkdownRemark(
+      filter: { fileAbsolutePath: { regex: "/blog/" } }
+      sort: { fields: frontmatter___date, order: DESC }
+    ) {
       edges {
         node {
-          html
           fields {
             slug
           }
@@ -32,7 +34,7 @@ const Blog = () => {
       <SEO title="Blog" keywords={KEYWORDS} />
       <h1 className="mt-4">Blog</h1>
       <ol>
-        {edges.map(({ node: { html, frontmatter: { title, date }, fields: { slug } } }) => 
+        {edges.map(({ node: { frontmatter: { title, date }, fields: { slug } } }) => 
           <div key={title}>
             <Link to={`/blog/${slug}`}>
               <h2>{title}</h2>

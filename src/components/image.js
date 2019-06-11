@@ -4,9 +4,9 @@ import Img from 'gatsby-image';
 
 const SPLASH_IMG_QUERY = graphql`
   query SplashQuery {
-    file(relativePath: { eq: "images/landscape.jpg" }) {
+    file(relativePath: { eq: "gallery/food/portrait.jpg" }) {
       childImageSharp {
-        fluid(maxWidth: 1300) {
+        fluid(maxWidth: 1300, quality: 100) {
           ...GatsbyImageSharpFluid
         }
       }
