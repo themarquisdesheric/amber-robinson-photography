@@ -28,6 +28,8 @@ h1 svg { width: 125px; }
 
 .nav-links { display: none; }
 
+.header { margin: 0 auto; }
+
 .header,
 .layout > main {
   max-width: 1440px;
@@ -36,10 +38,20 @@ h1 svg { width: 125px; }
 
 .layout > .splash { padding: 0; }
 
+.layout > main {
+  align-self: center;
+  width: 100%;
+}
+
 .layout > main,
 .splash > div > div  { min-height: calc(100vh - 4rem); }
 
 .splash > div > div { padding-bottom: 0 !important; }
+
+.splash > a > .gatsby-image-wrapper {
+  min-height: calc(100vh - 65px);
+  max-height: calc(100vh - 65px);
+}
 
 .portfolio-item { width: 100%; }
 
@@ -51,9 +63,6 @@ h1 svg { width: 125px; }
 
 .gallery-photos-container > div { grid-column: span 6; }
 
-/* // * NOT WORKING YET */
-.gallery-photos-container > img { object-fit: contain; }
-
 .gallery-photos-container > div:nth-child(3),
 .gallery-photos-container > div:nth-child(6) {
   grid-column: span 12;
@@ -61,6 +70,11 @@ h1 svg { width: 125px; }
 
 @media all and (min-width: 450px) {
   .portfolio-item { width: calc(50% - .5rem); }
+
+  .splash > a > .gatsby-image-wrapper {
+    min-height: calc(100vh - 72px);
+    max-height: calc(100vh - 72px);
+  }
 }
     
 @media all and (min-width: 750px) {

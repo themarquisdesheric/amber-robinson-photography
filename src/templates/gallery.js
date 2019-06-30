@@ -42,11 +42,10 @@ export const query = graphql`
   }
 `;
 
-// * get title and not entire html
+// * lightbox 
+// * grid fallback 
 
-// * instead of horizontal padding in layout/header, for tablet up set this on main:
-// * width: 700px;
-// * margin: 0 auto;
+// * get title and not entire html
 
 const Gallery = ({ data: { gallery, images } }) => (
   <Layout>
