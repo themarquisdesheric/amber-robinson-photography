@@ -1,7 +1,7 @@
 ---
 title: Food
 date: 6-20-2018
-thumbnail: "./landscape.jpg"
+thumbnail: "./3-MendocinoForest.jpg"
 keywords: ["hey", "food gallery"]
 ---
 
