@@ -68,6 +68,34 @@ h1 svg { width: 125px; }
   grid-column: span 12;
 }
 
+.lightbox {
+  background: #fff;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  min-height: 100vh;
+  z-index: 100;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.lightbox-close {
+  position: absolute;
+  top: 5%;
+  right: 5%;
+  z-index: 1000;
+}
+
+.lightbox .gatsby-image-wrapper {
+  max-height: 900px;
+  height: 90vh;
+  width: 100%;
+}
+
+.lightbox .gatsby-image-wrapper img { object-fit: contain !important; }
+
 @media all and (min-width: 450px) {
   .portfolio-item { width: calc(50% - .5rem); }
 
