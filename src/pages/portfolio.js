@@ -39,10 +39,10 @@ const Portfolio = () => {
   return (
     <Layout>
       <SEO title="Portfolio" keywords={KEYWORDS} />
-      <h1 className="mt-4">Portfolio</h1>
+      <h1 className="my-4">Portfolio</h1>
       <section className="flex flex-wrap justify-between">
         {galleries.map(({ node: { frontmatter: { thumbnail: { childImageSharp: { fluid } }, title }, fields: { slug } } }) => (
-          <article key={title} className="gallery-item">
+          <article key={title} className="portfolio-item mb-4">
             <Link to={`/portfolio/${slug}`}>
               <Img fluid={fluid} />
               <figcaption className="text-center text-xs my-2">{title}</figcaption>

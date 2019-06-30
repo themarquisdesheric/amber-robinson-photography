@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { graphql } from 'gatsby';
 
 import Layout from '../components/layout';
@@ -25,5 +26,15 @@ const Blog = ({ data: { markdownRemark: { html, frontmatter: { keywords } } } })
     <div dangerouslySetInnerHTML={{ __html: html }} />
   </Layout>
 );
+
+Blog.defaultProps = {
+  html: '',
+  keywords: []
+};
+
+Blog.propTypes = {
+  html: PropTypes.string.isRequired,
+  keywords: PropTypes.arrayOf(PropTypes.string).isRequired
+};
 
 export default Blog;

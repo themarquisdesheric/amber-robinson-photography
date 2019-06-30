@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { graphql } from 'gatsby';
 import Img from 'gatsby-image';
 
@@ -15,6 +16,10 @@ export const query = graphql`
       filter: {
         absolutePath: { regex: $absolutePathRegex }
         extension: { regex: "/(jpg)|(png)|(tif)|(tiff)|(webp)|(jpeg)/" }
+      }
+      sort: {
+        fields: [name]
+        order: ASC
       }
     ) {
       edges {
@@ -37,14 +42,32 @@ export const query = graphql`
   }
 `;
 
+// * get title and not entire html
+
+// * instead of horizontal padding in layout/header, for tablet up set this on main:
+// * width: 700px;
+// * margin: 0 auto;
+
 const Gallery = ({ data: { gallery, images } }) => (
   <Layout>
     <SEO title="Gallery" keywords={[...KEYWORDS, ...gallery.frontmatter.keywords]} /> 
     <div dangerouslySetInnerHTML={{ __html: gallery.html }} />
-    {images.edges.map(({ node: { name, childImageSharp } }) => <Img key={name} fluid={childImageSharp.fluid} />)}
+    <section className="gallery-photos-container">
+      {images.edges.map(({ node: { name, childImageSharp } }) => 
+        <Img key={name} fluid={childImageSharp.fluid} />
+      )}
+    </section>
   </Layout>
 );
 
-// ! proptypes
+Gallery.defaultProps = {
+  gallery: {},
+  images: {}
+};
+
+Gallery.propTypes = {
+  gallery: PropTypes.object.isRequired,
+  images: PropTypes.object.isRequired
+};
 
 export default Gallery;
