@@ -1,5 +1,5 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import { node, bool } from 'prop-types';
 import { useStaticQuery, graphql } from 'gatsby';
 
 import Header from './header';
@@ -33,8 +33,8 @@ const Layout = ({ children, splashPage }) => {
 };
 
 Layout.propTypes = {
-  children: PropTypes.node.isRequired,
-  splashPage: PropTypes.bool
+  children: node.isRequired,
+  splashPage: bool
 };
 
 export default Layout;

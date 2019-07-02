@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useStaticQuery, graphql } from 'gatsby';
-import PropTypes from 'prop-types';
+import { bool, arrayOf, string, func } from 'prop-types';
 
 import Signature from '../images/signature.svg';
 import Menu from '../images/menu.svg';
@@ -19,6 +19,7 @@ const BLOG_TITLE_QUERY = graphql`
   }
 `;
 
+
 const Links = ({ links, mobile }) =>
   links.map((link, idx) => (
     <Link 
@@ -35,9 +36,10 @@ const Links = ({ links, mobile }) =>
   ));
 
 Links.propTypes = {
-  links: PropTypes.arrayOf(PropTypes.string).isRequired,
-  mobile: PropTypes.bool
+  links: arrayOf(string).isRequired,
+  mobile: bool
 };
+
 
 const MobileMenu = ({ links, visible }) => (
   <div 
@@ -49,9 +51,10 @@ const MobileMenu = ({ links, visible }) => (
 );
 
 MobileMenu.propTypes = {
-  links: PropTypes.arrayOf(PropTypes.string).isRequired,
-  visible: PropTypes.bool.isRequired
+  links: arrayOf(string).isRequired,
+  visible: bool.isRequired
 };
+
 
 const HamburgerMenu = ({ handleSetVisible }) => (
   <div 
@@ -63,8 +66,9 @@ const HamburgerMenu = ({ handleSetVisible }) => (
 );
 
 HamburgerMenu.propTypes = {
-  handleSetVisible: PropTypes.func.isRequired
+  handleSetVisible: func.isRequired
 };
+
 
 const NavLinks = ({ links }) => (
   <div className="nav-links">
@@ -73,8 +77,9 @@ const NavLinks = ({ links }) => (
 );
 
 NavLinks.propTypes = {
-  links: PropTypes.arrayOf(PropTypes.string).isRequired
+  links: arrayOf(string).isRequired
 };
+
 
 const Header = () => {
   const { allMarkdownRemark: { edges } } = useStaticQuery(BLOG_TITLE_QUERY);

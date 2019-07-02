@@ -1,5 +1,5 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import { arrayOf, string } from 'prop-types';
 import { graphql } from 'gatsby';
 
 import Layout from '../components/layout';
@@ -33,8 +33,8 @@ Blog.defaultProps = {
 };
 
 Blog.propTypes = {
-  html: PropTypes.string.isRequired,
-  keywords: PropTypes.arrayOf(PropTypes.string).isRequired
+  html: string.isRequired,
+  keywords: arrayOf(string).isRequired
 };
 
 export default Blog;

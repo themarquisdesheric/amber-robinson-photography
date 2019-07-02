@@ -55,6 +55,8 @@ h1 svg { width: 125px; }
 
 .portfolio-item { width: 100%; }
 
+.gallery h1 { margin: 1rem 0; }
+
 .gallery-photos-container {
   display: grid;
   grid-column-gap: 1rem;
@@ -69,7 +71,6 @@ h1 svg { width: 125px; }
 }
 
 .lightbox {
-  background: #fff;
   position: fixed;
   top: 0;
   left: 0;
@@ -79,11 +80,19 @@ h1 svg { width: 125px; }
   display: flex;
   justify-content: center;
   align-items: center;
+  transition: background-color .6s;
 }
 
 .lightbox-close {
   position: absolute;
   top: 5%;
+  right: 5%;
+  z-index: 1000;
+}
+
+.lightbox-theme-toggle {
+  position: fixed;
+  bottom: 5%;
   right: 5%;
   z-index: 1000;
 }

@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
-import PropTypes from 'prop-types';
+import { object } from 'prop-types';
 import { graphql } from 'gatsby';
 import Img from 'gatsby-image';
 
 import Layout from '../components/layout';
+import LightBox from '../components/lightbox';
 import SEO from '../components/seo';
 import KEYWORDS from '../general-keywords';
 
@@ -46,13 +47,6 @@ export const query = graphql`
 
 // * get title and not entire html
 
-const LightBox = ({ image, closeLightBox }) => (
-  <article className="lightbox" onClick={closeLightBox}>
-    <span className="lightbox-close">x</span>
-    <Img fluid={image} />
-  </article>
-);
-
 const Gallery = ({ data: { gallery, images } }) => {
   const [lightBoxImage, toggleShowLightBox] = useState(false);
   
@@ -62,7 +56,7 @@ const Gallery = ({ data: { gallery, images } }) => {
   return (
     <Layout>
       <SEO title="Gallery" keywords={[...KEYWORDS, ...gallery.frontmatter.keywords]} /> 
-      <div dangerouslySetInnerHTML={{ __html: gallery.html }} />
+      <div className="gallery" dangerouslySetInnerHTML={{ __html: gallery.html }} />
       <section className="gallery-photos-container">
         {images.edges.map(({ node: { name, childImageSharp } }) => 
           <div key={name} onClick={() => openLightBox(childImageSharp.fluid)}>
@@ -82,8 +76,8 @@ Gallery.defaultProps = {
 };
 
 Gallery.propTypes = {
-  gallery: PropTypes.object.isRequired,
-  images: PropTypes.object.isRequired
+  gallery: object.isRequired,
+  images: object.isRequired
 };
 
 export default Gallery;
