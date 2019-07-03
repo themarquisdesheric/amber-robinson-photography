@@ -97,6 +97,16 @@ h1 svg { width: 125px; }
   z-index: 1000;
 }
 
+.lightbox-left-arrow,
+.lightbox-right-arrow {
+  position: fixed;
+  bottom: 5%;
+  left: 0%;
+  z-index: 1000;
+}
+
+.lightbox-right-arrow { left: 6% }
+
 .lightbox .gatsby-image-wrapper {
   max-height: 900px;
   height: 90vh;
