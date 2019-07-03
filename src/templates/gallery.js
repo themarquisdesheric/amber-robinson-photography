@@ -48,24 +48,24 @@ export const query = graphql`
 // * get title and not entire html
 
 const Gallery = ({ data: { gallery, images } }) => {
-  const [lightBoxImage, toggleShowLightBox] = useState(false);
+  const [imageIndex, toggleShowLightBox] = useState(null);
   
-  const closeLightBox = () => toggleShowLightBox(false);
-  const openLightBox = (lightBoxImage) => toggleShowLightBox(lightBoxImage);
+  const closeLightBox = () => toggleShowLightBox(null);
+  const openLightBox = (newImageIndex) => toggleShowLightBox(newImageIndex);
 
   return (
     <Layout>
       <SEO title="Gallery" keywords={[...KEYWORDS, ...gallery.frontmatter.keywords]} /> 
       <div className="gallery" dangerouslySetInnerHTML={{ __html: gallery.html }} />
       <section className="gallery-photos-container">
-        {images.edges.map(({ node: { name, childImageSharp } }) => 
-          <div key={name} onClick={() => openLightBox(childImageSharp.fluid)}>
+        {images.edges.map(({ node: { name, childImageSharp } }, index) => 
+          <div key={name} onClick={() => openLightBox(index)}>
             <Img fluid={childImageSharp.fluid} />
           </div>
         )}
       </section>
 
-      {lightBoxImage && <LightBox image={lightBoxImage} closeLightBox={closeLightBox} />}
+      {imageIndex >= 0 && <LightBox images={images.edges} imageIndex={imageIndex} closeLightBox={closeLightBox} />}
     </Layout>
   );
 };

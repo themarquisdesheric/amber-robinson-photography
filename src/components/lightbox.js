@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import { oneOfType, object, bool, func } from 'prop-types';
+import { number, object, func, arrayOf } from 'prop-types';
 import Img from 'gatsby-image';
 
-const LightBox = ({ image, closeLightBox }) => {
+const LightBox = ({ images, imageIndex, closeLightBox }) => {
   const [lightTheme, toggleLightTheme] = useState(true);
 
   const light = {
@@ -15,6 +15,8 @@ const LightBox = ({ image, closeLightBox }) => {
     color: '#fff'
   };
   
+  if (imageIndex === null) return null;
+
   return (
     <div className="relative">
       <article 
@@ -23,7 +25,7 @@ const LightBox = ({ image, closeLightBox }) => {
         style={lightTheme ? light : dark}
       >
         <span className="lightbox-close">x</span>
-        <Img fluid={image} />
+        <Img fluid={images[imageIndex].node.childImageSharp.fluid} />
       </article>
       <span 
         className="lightbox-theme-toggle"
@@ -37,7 +39,8 @@ const LightBox = ({ image, closeLightBox }) => {
 };
 
 LightBox.propTypes = {
-  image: oneOfType([object, bool]).isRequired,
+  images: arrayOf(object).isRequired,
+  imageIndex: number,
   closeLightBox: func.isRequired
 };
 
