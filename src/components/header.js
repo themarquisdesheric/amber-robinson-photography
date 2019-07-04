@@ -19,7 +19,6 @@ const BLOG_TITLE_QUERY = graphql`
   }
 `;
 
-
 const Links = ({ links, mobile }) =>
   links.map((link, idx) => (
     <Link 
@@ -29,6 +28,7 @@ const Links = ({ links, mobile }) =>
           ? '' 
           : `uppercase sm:inline sm:text-black ${(idx + 1 === links.length) ? '' : 'sm:mr-4'}`
       }
+      activeStyle={{ borderBottom: '2px solid black' }}
       key={link}
     >
       {link}

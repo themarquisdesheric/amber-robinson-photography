@@ -84,7 +84,7 @@ h1 svg { width: 125px; }
 }
 
 .lightbox-close {
-  position: absolute;
+  position: fixed;
   top: 5%;
   right: 5%;
   z-index: 1000;
@@ -100,12 +100,13 @@ h1 svg { width: 125px; }
 .lightbox-left-arrow,
 .lightbox-right-arrow {
   position: fixed;
-  bottom: 5%;
-  left: 0%;
+  bottom: 50%;
   z-index: 1000;
 }
 
-.lightbox-right-arrow { left: 6% }
+.lightbox-left-arrow { left: 5%; }
+
+.lightbox-right-arrow { right: 5%; }
 
 .lightbox .gatsby-image-wrapper {
   max-height: 900px;

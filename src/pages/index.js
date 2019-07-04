@@ -8,7 +8,7 @@ import KEYWORDS from '../general-keywords';
 
 const SPLASH_IMG_QUERY = graphql`
   query SplashQuery {
-    file(relativePath: { eq: "gallery/food/3-MendocinoForest.jpg" }) {
+    file(relativePath: { eq: "gallery/zörglephötös/3-MendocinoForest.jpg" }) {
       childImageSharp {
         fluid(maxWidth: 1300, quality: 100) {
           ...GatsbyImageSharpFluid

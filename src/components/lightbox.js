@@ -1,17 +1,25 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 import { number, object, func, arrayOf } from 'prop-types';
 import Img from 'gatsby-image';
 
-// active link class
+const light = {
+  backgroundColor: '#fff',
+  color: '#000'
+};
+
+const dark = {
+  backgroundColor: '#000',
+  color: '#fff'
+};
 
 const LightBox = ({ images, imageIndex: initialImageIndex, closeLightBox }) => {
-  const [lightTheme, toggleLightTheme] = useState(true);
   const [imageIndex, setImageIndex] = useState(initialImageIndex);
-  
+  const [lightTheme, toggleLightTheme] = useState(true);
+
   const updateImageIndex = (operation) => {
     let index = imageIndex || initialImageIndex;
 
-    operation === 'increment' ? index++ : index--;
+    operation === 'next' ? index++ : index--;
     
     if (index === images.length) {
       index = 0;
@@ -22,15 +30,24 @@ const LightBox = ({ images, imageIndex: initialImageIndex, closeLightBox }) => {
     setImageIndex(index);
   };
 
-  const light = {
-    backgroundColor: '#fff',
-    color: '#000'
-  };
-  
-  const dark = {
-    backgroundColor: '#000',
-    color: '#fff'
-  };
+  const handleKeyDown = useCallback(
+    ({ key }) => {
+      if (key === 'ArrowRight') {        
+        updateImageIndex('next');
+      } else if (key === 'ArrowLeft') {
+        updateImageIndex('previous');
+      }
+    },
+    [imageIndex],
+  );
+
+  useEffect(() => {
+    window.addEventListener('keydown', handleKeyDown);
+
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [handleKeyDown]);
   
   if (initialImageIndex === null) return null;
 
@@ -56,15 +73,19 @@ const LightBox = ({ images, imageIndex: initialImageIndex, closeLightBox }) => {
       </span>
       <span 
         className="lightbox-left-arrow"
-        onClick={() => updateImageIndex('decrement')}
+        onClick={() => updateImageIndex('previous')}
+        role="img"
+        aria-label="previous image"
       >
-        Left
+        ⬅️
       </span>
       <span 
         className="lightbox-right-arrow"
-        onClick={() => updateImageIndex('increment')}
+        onClick={() => updateImageIndex('next')}
+        role="img"
+        aria-label="next image"
       >
-        Right
+        ➡️
       </span>
     </div>
   );
