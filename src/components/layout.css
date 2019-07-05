@@ -57,16 +57,34 @@ h1 svg { width: 125px; }
 
 .gallery h1 { margin: 1rem 0; }
 
+/* grid fallback */
 .gallery-photos-container {
-  display: grid;
-  grid-column-gap: 1rem;
-  grid-row-gap: 1rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
 }
 
-.gallery-photos-container > div { grid-column: span 6; }
+.gallery-photos-container > div { 
+  min-width: calc(50% - .5rem);
+  margin-bottom: 1rem;
+}
 
-.gallery-photos-container > div:nth-child(3),
-.gallery-photos-container > div:nth-child(6) { grid-column: span 12; }
+@supports (display: grid) {
+  .gallery-photos-container {
+    display: grid;
+    grid-column-gap: 1rem;
+    grid-row-gap: 1rem;
+    justify-content: unset;
+  }
+
+  .gallery-photos-container > div { 
+    grid-column: span 6; 
+    margin-bottom: 0;
+  }
+
+  .gallery-photos-container > div:nth-child(3),
+  .gallery-photos-container > div:nth-child(6) { grid-column: span 12; }
+}
 
 .lightbox {
   position: fixed;
