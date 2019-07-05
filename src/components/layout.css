@@ -66,9 +66,7 @@ h1 svg { width: 125px; }
 .gallery-photos-container > div { grid-column: span 6; }
 
 .gallery-photos-container > div:nth-child(3),
-.gallery-photos-container > div:nth-child(6) {
-  grid-column: span 12;
-}
+.gallery-photos-container > div:nth-child(6) { grid-column: span 12; }
 
 .lightbox {
   position: fixed;
@@ -83,30 +81,25 @@ h1 svg { width: 125px; }
   transition: background-color .6s;
 }
 
-.lightbox-close {
+.lightbox-controls > button {
   position: fixed;
-  top: 5%;
-  right: 5%;
   z-index: 1000;
+  transition: opacity .7s;
+  opacity: 0;
 }
 
-.lightbox-theme-toggle {
-  position: fixed;
-  bottom: 5%;
-  right: 5%;
-  z-index: 1000;
-}
+.lightbox-controls.visible > button { opacity: 1; }
 
-.lightbox-left-arrow,
-.lightbox-right-arrow {
-  position: fixed;
-  bottom: 50%;
-  z-index: 1000;
-}
+.lightbox-controls > button:not(.lightbox-left-arrow) { right: 5%; }
 
 .lightbox-left-arrow { left: 5%; }
 
-.lightbox-right-arrow { right: 5%; }
+.lightbox-close { top: 5%; }
+
+.lightbox-theme-toggle { bottom: 5%; }
+
+.lightbox-left-arrow,
+.lightbox-right-arrow { bottom: 50%; }
 
 .lightbox .gatsby-image-wrapper {
   max-height: 900px;
