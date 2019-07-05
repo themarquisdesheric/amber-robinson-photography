@@ -2,7 +2,7 @@ import React, { useState, useCallback, useEffect } from 'react';
 import { number, object, func, arrayOf } from 'prop-types';
 import Img from 'gatsby-image';
 
-import LightboxControls from './lightbox-controls';
+import LightBoxControls from './lightbox-controls';
 
 const light = {
   backgroundColor: '#fff',
@@ -16,10 +16,9 @@ const dark = {
 
 let timeout;
 
-const LightBox = ({ images, imageIndex: initialImageIndex, closeLightBox }) => {
-  const [imageIndex, setImageIndex] = useState(initialImageIndex);
-  const [lightTheme, toggleLightTheme] = useState(true);
+const LightBox = ({ images, imageIndex, setImageIndex, closeLightBox }) => {
   const [controlsVisible, setControlsVisible] = useState(true);
+  const [lightTheme, setLightTheme] = useState(true);
 
   // keep controls visible if hovering over them
   const handleMouseEnter = () => {
@@ -38,7 +37,7 @@ const LightBox = ({ images, imageIndex: initialImageIndex, closeLightBox }) => {
   };
 
   const updateImageIndex = (operation) => {
-    let index = imageIndex || initialImageIndex;
+    let index = imageIndex;
 
     operation === 'next' ? index++ : index--;
     
@@ -72,7 +71,7 @@ const LightBox = ({ images, imageIndex: initialImageIndex, closeLightBox }) => {
     };
   }, [handleKeyDown]);
   
-  if (initialImageIndex === null) return null;
+  if (imageIndex === null) return null;
 
   return (
     <div className="relative">
@@ -81,14 +80,13 @@ const LightBox = ({ images, imageIndex: initialImageIndex, closeLightBox }) => {
         onMouseMove={handleMouseMove}
         style={lightTheme ? light : dark}
       >
-        <Img fluid={images[imageIndex || initialImageIndex].node.childImageSharp.fluid} />
+        <Img fluid={images[imageIndex].node.childImageSharp.fluid} />
       </article>
-      <LightboxControls 
+      <LightBoxControls 
         controlsVisible={controlsVisible} 
-        setImageIndex={setImageIndex} 
         closeLightBox={closeLightBox} 
         handleMouseEnter={handleMouseEnter} 
-        toggleLightTheme={toggleLightTheme} 
+        setLightTheme={setLightTheme} 
         lightTheme={lightTheme}
         themes={[light, dark]}
         updateImageIndex={updateImageIndex}
@@ -100,6 +98,7 @@ const LightBox = ({ images, imageIndex: initialImageIndex, closeLightBox }) => {
 LightBox.propTypes = {
   images: arrayOf(object).isRequired,
   imageIndex: number,
+  setImageIndex: func.isRequired,
   closeLightBox: func.isRequired
 };
 

@@ -1,12 +1,11 @@
 import React from 'react';
 import { bool, func, arrayOf, object } from 'prop-types';
 
-const LightboxControls = ({ 
+const LightBoxControls = ({ 
   controlsVisible, 
-  setImageIndex, 
   closeLightBox, 
   handleMouseEnter, 
-  toggleLightTheme,
+  setLightTheme,
   lightTheme,
   themes: [light, dark],
   updateImageIndex
@@ -14,17 +13,14 @@ const LightboxControls = ({
   <div className={`lightbox-controls ${controlsVisible ? 'visible' : ''}`}>
     <button 
       className="lightbox-close"
-      onClick={() => {
-        setImageIndex(null);
-        closeLightBox();
-      }} 
+      onClick={closeLightBox} 
       onMouseEnter={handleMouseEnter}
     >
       x
     </button>
     <button 
       className="lightbox-theme-toggle"
-      onClick={() => toggleLightTheme(!lightTheme)}
+      onClick={() => setLightTheme(!lightTheme)}
       onMouseEnter={handleMouseEnter}
       style={{ color: lightTheme ? light.color : dark.color }}
     >
@@ -51,15 +47,14 @@ const LightboxControls = ({
   </div>
 );
 
-LightboxControls.propTypes = {
+LightBoxControls.propTypes = {
   controlsVisible: bool.isRequired,
-  setImageIndex: func.isRequired,
   closeLightBox: func.isRequired,
   handleMouseEnter: func.isRequired,
-  toggleLightTheme: func.isRequired,
+  setLightTheme: func.isRequired,
   lightTheme: bool.isRequired,
   themes: arrayOf(object).isRequired,
   updateImageIndex: func.isRequired
 };
 
-export default LightboxControls;
+export default LightBoxControls;

@@ -48,10 +48,17 @@ export const query = graphql`
 // * get title and not entire html
 
 const Gallery = ({ data: { gallery, images } }) => {
-  const [imageIndex, toggleShowLightBox] = useState(null);
+  const [showLightBox, toggleShowLightBox] = useState(false);
+  const [imageIndex, setImageIndex] = useState(null);
   
-  const closeLightBox = () => toggleShowLightBox(null);
-  const openLightBox = (newImageIndex) => toggleShowLightBox(newImageIndex);
+  const openLightBox = (newImageIndex) => {
+    setImageIndex(newImageIndex);
+    toggleShowLightBox(true);
+  };
+
+  const closeLightBox = () => {
+    toggleShowLightBox(false);
+  };
 
   return (
     <Layout>
@@ -65,7 +72,7 @@ const Gallery = ({ data: { gallery, images } }) => {
         )}
       </section>
 
-      {imageIndex >= 0 && <LightBox images={images.edges} imageIndex={imageIndex} closeLightBox={closeLightBox} />}
+      {showLightBox && <LightBox images={images.edges} imageIndex={imageIndex} setImageIndex={setImageIndex} closeLightBox={closeLightBox} />}
     </Layout>
   );
 };
