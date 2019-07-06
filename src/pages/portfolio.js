@@ -5,6 +5,7 @@ import Img from 'gatsby-image';
 import Layout from '../components/layout';
 import SEO from '../components/seo';
 import KEYWORDS from '../general-keywords';
+import { preventRightClick } from '../utils';
 
 const GALLERY_QUERY = graphql`
   query GalleryQuery {
@@ -39,11 +40,10 @@ const Portfolio = () => {
   return (
     <Layout>
       <SEO title="Portfolio" keywords={KEYWORDS} />
-      <h1 className="my-4">Portfolio</h1>
-      <section className="flex flex-wrap justify-between">
+      <section className="flex flex-wrap justify-between mt-8">
         {galleries.map(({ node: { frontmatter: { thumbnail: { childImageSharp: { fluid } }, title }, fields: { slug } } }) => (
           <article key={title} className="portfolio-item mb-4">
-            <Link to={`/portfolio/${slug}`}>
+            <Link to={`/portfolio/${slug}`} onContextMenu={preventRightClick}>
               <Img fluid={fluid} />
               <figcaption className="text-center text-xs my-2">{title}</figcaption>
             </Link>

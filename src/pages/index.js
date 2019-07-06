@@ -5,6 +5,7 @@ import Img from 'gatsby-image';
 import Layout from '../components/layout';
 import SEO from '../components/seo';
 import KEYWORDS from '../general-keywords';
+import { preventRightClick } from '../utils';
 
 const SPLASH_IMG_QUERY = graphql`
   query SplashQuery {
@@ -24,7 +25,7 @@ const IndexPage = () => {
   return (
     <Layout splashPage={true}>
       <SEO title="Home" keywords={KEYWORDS} />
-      <Link to="/portfolio">
+      <Link to="/portfolio" onContextMenu={preventRightClick}>
         <Img fluid={file.childImageSharp.fluid} />
       </Link>
     </Layout>

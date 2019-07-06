@@ -1,8 +1,10 @@
 import React, { useState, useCallback, useEffect } from 'react';
 import { number, object, func, arrayOf } from 'prop-types';
+import { useSpring, animated } from 'react-spring';
 import Img from 'gatsby-image';
 
 import LightBoxControls from './lightbox-controls';
+import { preventRightClick } from '../utils';
 
 const light = {
   backgroundColor: '#fff',
@@ -19,6 +21,11 @@ let timeout;
 const LightBox = ({ images, imageIndex, setImageIndex, closeLightBox }) => {
   const [controlsVisible, setControlsVisible] = useState(true);
   const [lightTheme, setLightTheme] = useState(true);
+  const props = useSpring({ 
+    opacity: 1, 
+    from: { opacity: 0 },
+    config: { duration: 100 }
+  });
 
   // keep controls visible if hovering over them
   const handleMouseEnter = () => {
@@ -33,7 +40,7 @@ const LightBox = ({ images, imageIndex, setImageIndex, closeLightBox }) => {
 
     timeout = setTimeout(() => {
       setControlsVisible(false);
-    }, 1500);
+    }, 1000);
   };
 
   const updateImageIndex = (operation) => {
@@ -56,6 +63,8 @@ const LightBox = ({ images, imageIndex, setImageIndex, closeLightBox }) => {
         updateImageIndex('next');
       } else if (key === 'ArrowLeft') {
         updateImageIndex('previous');
+      } else if (key === 'Escape') {
+        closeLightBox();
       }
     },
     [imageIndex],
@@ -74,10 +83,11 @@ const LightBox = ({ images, imageIndex, setImageIndex, closeLightBox }) => {
   if (imageIndex === null) return null;
 
   return (
-    <div className="relative">
+    <animated.div className="relative" style={props}>
       <article 
         className="lightbox"
         onMouseMove={handleMouseMove}
+        onContextMenu={preventRightClick}
         style={lightTheme ? light : dark}
       >
         <Img fluid={images[imageIndex].node.childImageSharp.fluid} />
@@ -91,7 +101,7 @@ const LightBox = ({ images, imageIndex, setImageIndex, closeLightBox }) => {
         themes={[light, dark]}
         updateImageIndex={updateImageIndex}
       />
-    </div>
+    </animated.div>
   );
 };
 

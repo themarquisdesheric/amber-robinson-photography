@@ -7,6 +7,7 @@ import Layout from '../components/layout';
 import LightBox from '../components/lightbox';
 import SEO from '../components/seo';
 import KEYWORDS from '../general-keywords';
+import { preventRightClick } from '../utils';
 
 // we can't access context (for the slug/absolutePathRegex) via useStaticQuery
 // so we need to export the query as a named export so gatsby can pick it up
@@ -43,14 +44,12 @@ export const query = graphql`
   }
 `;
 
-// * grid fallback 
-
 // * get title and not entire html
 
 const Gallery = ({ data: { gallery, images } }) => {
   const [showLightBox, toggleShowLightBox] = useState(false);
   const [imageIndex, setImageIndex] = useState(null);
-  
+
   const openLightBox = (newImageIndex) => {
     setImageIndex(newImageIndex);
     toggleShowLightBox(true);
@@ -66,7 +65,7 @@ const Gallery = ({ data: { gallery, images } }) => {
       <div className="gallery" dangerouslySetInnerHTML={{ __html: gallery.html }} />
       <section className="gallery-photos-container">
         {images.edges.map(({ node: { name, childImageSharp } }, index) => 
-          <div key={name} onClick={() => openLightBox(index)}>
+          <div key={name} onClick={() => openLightBox(index)} onContextMenu={preventRightClick}>
             <Img fluid={childImageSharp.fluid} />
           </div>
         )}
