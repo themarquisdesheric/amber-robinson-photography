@@ -1,14 +1,14 @@
 # How to use your website
 
+<!-- TODO: keep up to date, dependencies, etc -->
+
 ## Running your website locally
 
   1.  Open the terminal by typing `ctrl` and `~`
 
   2. Type `gatsby develop` and hit enter
 
-  3. Your site is now running at `http://localhost:8000`!
-
-  You can now edit the source code. Save your changes and the browser will update in real time!
+  3. Your site is now running at `http://localhost:8000`! You can now edit the source code. Save your changes and the browser will update in real time!
 
 ## Blog
 

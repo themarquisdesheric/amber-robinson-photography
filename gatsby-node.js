@@ -13,11 +13,10 @@ module.exports.onCreateNode = ({ node, actions: { createNodeField } }) => {
 };
 
 module.exports.createPages = async ({ graphql, actions: { createPage } }) => {
-  const Blog = path.resolve('./src/templates/blog.js');
-
-  const { data: { allMarkdownRemark: { edges } } } = await graphql(`
-    query {
-      allMarkdownRemark {
+  const BlogTemplate = path.resolve('./src/templates/blog.js');
+  const { data: { allMarkdownRemark: { edges: blogPosts } } } = await graphql(`
+    query slugQuery {
+      allMarkdownRemark(filter: { fileAbsolutePath: { regex: "/blog/" } }) {
         edges {
           node {
             fields {
@@ -29,12 +28,42 @@ module.exports.createPages = async ({ graphql, actions: { createPage } }) => {
     }
   `);
 
-  edges.forEach(({ node: { fields: { slug } } }) => {
+  blogPosts.forEach(({ node: { fields: { slug } } }) => {
     createPage({
-      component: Blog,
+      component: BlogTemplate,
       path: `/blog/${slug}`,
       context: {
         slug
+      }
+    });
+  });
+
+  const GalleryTemplate = path.resolve('./src/templates/gallery.js');
+  const { data: { allMarkdownRemark: { edges: galleries } } } = await graphql(`
+    query slugQuery {
+      allMarkdownRemark(filter: { fileAbsolutePath: { regex: "/gallery/" } }) {
+        edges {
+          node {
+            fileAbsolutePath
+            fields {
+              slug
+            }
+          }
+        }
+      }
+    }
+  `);
+
+  galleries.forEach(({ node }) => {
+    const { fields: { slug } } = node;
+
+    createPage({
+      component: GalleryTemplate,
+      path: `/portfolio/${slug}`,
+      context: {
+        slug,
+        // Pass the current directory of the project as regex in context so that the GraphQL query can filter by it
+        absolutePathRegex: `/^${path.dirname(node.fileAbsolutePath)}/`
       }
     });
   });

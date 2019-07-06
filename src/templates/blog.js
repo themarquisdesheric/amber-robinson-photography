@@ -1,4 +1,5 @@
 import React from 'react';
+import { arrayOf, string } from 'prop-types';
 import { graphql } from 'gatsby';
 
 import Layout from '../components/layout';
@@ -21,9 +22,19 @@ export const query = graphql`
 
 const Blog = ({ data: { markdownRemark: { html, frontmatter: { keywords } } } }) => (
   <Layout>
-    <SEO title="Blog" keywords={[...KEYWORDS, keywords]} /> 
+    <SEO title="Blog" keywords={[...KEYWORDS, ...keywords]} /> 
     <div dangerouslySetInnerHTML={{ __html: html }} />
   </Layout>
 );
+
+Blog.defaultProps = {
+  html: '',
+  keywords: []
+};
+
+Blog.propTypes = {
+  html: string.isRequired,
+  keywords: arrayOf(string).isRequired
+};
 
 export default Blog;

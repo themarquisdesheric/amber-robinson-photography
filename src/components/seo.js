@@ -6,14 +6,14 @@
  */
 
 import React from 'react';
-import PropTypes from 'prop-types';
+import { string, arrayOf, object } from 'prop-types';
 import Helmet from 'react-helmet';
 import { useStaticQuery, graphql } from 'gatsby';
 
 function SEO({ description, lang, meta, keywords, title }) {
   const { site } = useStaticQuery(
     graphql`
-      query {
+      query SiteTitleDescriptionQuery {
         site {
           siteMetadata {
             title
@@ -88,11 +88,11 @@ SEO.defaultProps = {
 };
 
 SEO.propTypes = {
-  description: PropTypes.string,
-  lang: PropTypes.string,
-  meta: PropTypes.arrayOf(PropTypes.object),
-  keywords: PropTypes.arrayOf(PropTypes.string),
-  title: PropTypes.string.isRequired
+  description: string,
+  lang: string,
+  meta: arrayOf(object),
+  keywords: arrayOf(string),
+  title: string.isRequired
 };
 
 export default SEO;

@@ -1,17 +1,35 @@
 import React from 'react';
+import { useStaticQuery, graphql, Link } from 'gatsby';
+import Img from 'gatsby-image';
 
 import Layout from '../components/layout';
-import Image from '../components/image';
 import SEO from '../components/seo';
 import KEYWORDS from '../general-keywords';
+import { preventRightClick } from '../utils';
 
-const IndexPage = () => (
-  <Layout>
-    <SEO title="Home" keywords={KEYWORDS} />
-    <div className="mt-4">
-      <Image />
-    </div>
-  </Layout>
-);
+const SPLASH_IMG_QUERY = graphql`
+  query SplashQuery {
+    file(relativePath: { eq: "gallery/zörglephötös/3-MendocinoForest.jpg" }) {
+      childImageSharp {
+        fluid(maxWidth: 1300, quality: 100) {
+          ...GatsbyImageSharpFluid
+        }
+      }
+    }
+  }
+`;
+
+const IndexPage = () => {
+  const { file } = useStaticQuery(SPLASH_IMG_QUERY);
+
+  return (
+    <Layout splashPage={true}>
+      <SEO title="Home" keywords={KEYWORDS} />
+      <Link to="/portfolio" onContextMenu={preventRightClick}>
+        <Img fluid={file.childImageSharp.fluid} />
+      </Link>
+    </Layout>
+  );
+};
 
 export default IndexPage;
