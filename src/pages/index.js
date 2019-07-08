@@ -9,7 +9,7 @@ import { preventRightClick } from '../utils';
 
 const SPLASH_IMG_QUERY = graphql`
   query SplashQuery {
-    file(relativePath: { eq: "gallery/zörglephötös/3-MendocinoForest.jpg" }) {
+    file(relativePath: { eq: "images/triptych-final-no-pad.jpg" }) {
       childImageSharp {
         fluid(maxWidth: 1300, quality: 100) {
           ...GatsbyImageSharpFluid

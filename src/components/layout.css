@@ -13,8 +13,6 @@ body { font-family: sans-serif; }
   margin: 1rem 0;
 }
 
-header a { color: white; }
-
 a { text-decoration: none; }
 
 nav a { border-bottom: 2px solid transparent; }
@@ -29,6 +27,15 @@ h1 svg { width: 125px; }
 .nav-links { display: none; }
 
 .header { margin: 0 auto; }
+
+.hamburger-menu svg {
+  width: 40px;
+  height: 40px;
+  position: relative;
+  bottom: 6px;
+}
+
+.layout button { outline: none; }
 
 .header,
 .layout > main {
@@ -110,16 +117,33 @@ h1 svg { width: 125px; }
 
 .lightbox-controls.visible > button { opacity: 1; }
 
-.lightbox-controls > button:not(.lightbox-left-arrow) { right: 5%; }
-
-.lightbox-left-arrow { left: 5%; }
-
 .lightbox-close { top: 5%; }
+
+.lightbox-close svg {
+  width: 40px;
+  height: 40px;
+  transform: rotate(90deg);
+}
 
 .lightbox-theme-toggle { bottom: 5%; }
 
+.lightbox-controls > button:not(.lightbox-left-arrow) { right: 5%; }
+
+.lightbox-left-arrow { 
+  left: 5%;
+  transform: rotate(4deg);
+}
+
+.lightbox-right-arrow { transform: rotate(-4deg); }
+
 .lightbox-left-arrow,
 .lightbox-right-arrow { bottom: 50%; }
+
+.lightbox-left-arrow svg,
+.lightbox-right-arrow svg { 
+  width: 90px;
+  height: 100%;
+}
 
 .lightbox .gatsby-image-wrapper {
   max-height: 900px;
