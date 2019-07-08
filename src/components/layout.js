@@ -21,7 +21,7 @@ const Layout = ({ children, splashPage }) => {
 
   return (
     <div className="layout flex flex-col">
-      <Header siteTitle={title} />
+      <Header siteTitle={title} splashPage={splashPage} />
       <main className={splashPage ? 'splash' : ''}> 
         {children}
       </main>

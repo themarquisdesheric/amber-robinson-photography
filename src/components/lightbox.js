@@ -20,10 +20,13 @@ let timeout;
 
 const LightBox = ({ images, imageIndex, setImageIndex, closeLightBox }) => {
   const [controlsVisible, setControlsVisible] = useState(true);
+
   const [lightTheme, setLightTheme] = useState(true);
+
+  // * you can try useTransition here 
   const props = useSpring({ 
-    opacity: 1, 
     from: { opacity: 0 },
+    opacity: 1, 
     config: { duration: 100 }
   });
 

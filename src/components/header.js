@@ -3,7 +3,7 @@ import { Link, useStaticQuery, graphql } from 'gatsby';
 import { bool, arrayOf, string, func } from 'prop-types';
 
 import Signature from '../images/signature.svg';
-import Menu from '../images/menu.svg';
+import Menu from '../images/snake-hamburger-menu-dark.svg';
 
 const BLOG_TITLE_QUERY = graphql`
   query BlogTitleQuery {
@@ -81,7 +81,7 @@ NavLinks.propTypes = {
 };
 
 
-const Header = () => {
+const Header = ({ splashPage }) => {
   const { allMarkdownRemark: { edges } } = useStaticQuery(BLOG_TITLE_QUERY);
   const [visible, setVisible] = useState(false);
   const links = ['portfolio', 'about', 'contact'];
@@ -94,7 +94,7 @@ const Header = () => {
   return (
     <div>
       <MobileMenu links={links} visible={visible} />  
-      <header className="header flex items-center justify-between border-b h-16">
+      <header className={`header flex items-center justify-between h-16 ${splashPage ? '' : 'border-b'}`}>
         <h1 className="text-xl sm:text-2xl m-0">
           <Link to="/">
             <Signature />
@@ -107,6 +107,10 @@ const Header = () => {
       </header>
     </div>
   );
+};
+
+Header.propTypes = {
+  splashPage: bool
 };
 
 export default Header;

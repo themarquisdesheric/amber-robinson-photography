@@ -1,6 +1,10 @@
 import React from 'react';
 import { bool, func, arrayOf, object } from 'prop-types';
 
+import CloseIcon from '../images/Xsnakes.svg';
+import ArrowSnakeLeft from '../images/arrow-snake-left.svg';
+import ArrowSnakeRight from '../images/arrow-snake-right.svg';
+
 const LightBoxControls = ({ 
   controlsVisible, 
   closeLightBox, 
@@ -16,7 +20,7 @@ const LightBoxControls = ({
       onClick={closeLightBox} 
       onMouseEnter={handleMouseEnter}
     >
-      x
+      <CloseIcon />
     </button>
     <button 
       className="lightbox-theme-toggle"
@@ -24,7 +28,7 @@ const LightBoxControls = ({
       onMouseEnter={handleMouseEnter}
       style={{ color: lightTheme ? light.color : dark.color }}
     >
-      <span role="img" aria-label="previous image">
+      <span role="img" aria-label={`set lightbox theme ${lightTheme ? 'dark' : 'light'}`}>
         {lightTheme ? '☾' : '🌞'}
       </span>
     </button>
@@ -33,16 +37,18 @@ const LightBoxControls = ({
       onClick={() => updateImageIndex('previous')}
       onMouseEnter={handleMouseEnter}
     >
-      <span role="img" aria-label="previous image">⬅️</span>
+      <span role="img" aria-label="previous image">
+        <ArrowSnakeLeft />
+      </span>
     </button>
     <button 
       className="lightbox-right-arrow"
       onClick={() => updateImageIndex('next')}
       onMouseEnter={handleMouseEnter}
-      role="img"
-      aria-label="next image"
     >
-      <span role="img" aria-label="previous image">➡️</span>
+      <span role="img" aria-label="next image">
+        <ArrowSnakeRight />
+      </span>
     </button>
   </div>
 );
