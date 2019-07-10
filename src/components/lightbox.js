@@ -20,10 +20,8 @@ let timeout;
 
 const LightBox = ({ images, imageIndex, setImageIndex, closeLightBox }) => {
   const [controlsVisible, setControlsVisible] = useState(true);
-
   const [lightTheme, setLightTheme] = useState(true);
 
-  // * you can try useTransition here 
   const props = useSpring({ 
     from: { opacity: 0 },
     opacity: 1, 
@@ -93,7 +91,7 @@ const LightBox = ({ images, imageIndex, setImageIndex, closeLightBox }) => {
         onContextMenu={preventRightClick}
         style={lightTheme ? light : dark}
       >
-        <Img fluid={images[imageIndex].node.childImageSharp.fluid} />
+        <Img fluid={images[imageIndex].node.childImageSharp.fluid} imgStyle={{ objectFit: 'contain' }} />
       </article>
       <LightBoxControls 
         controlsVisible={controlsVisible} 
