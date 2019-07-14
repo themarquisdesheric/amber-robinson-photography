@@ -25,7 +25,7 @@ const Layout = ({ children, splashPage }) => {
       <main className={splashPage ? 'splash' : ''}> 
         {children}
       </main>
-      <footer className="h-8 flex justify-center items-center border-t border-dotted text-xs sm:text-sm">
+      <footer className="flex justify-center items-center text-xs h-8 mt-4 sm:text-sm">
         © {new Date().getFullYear()} {title}
       </footer>
     </div>

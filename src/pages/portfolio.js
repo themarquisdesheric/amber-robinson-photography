@@ -45,7 +45,7 @@ const Portfolio = () => {
           <article key={title} className="portfolio-item mb-4">
             <Link to={`/portfolio/${slug}`} onContextMenu={preventRightClick}>
               <Img fluid={fluid} imgStyle={{ objectFit: 'contain' }} />
-              <figcaption className="text-center text-xs my-2">{title}</figcaption>
+              <figcaption className="text-center text-xs mt-1">{title}</figcaption>
             </Link>
           </article>
         ))}
