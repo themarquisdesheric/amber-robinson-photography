@@ -3,8 +3,9 @@ import { node, bool } from 'prop-types';
 import { useStaticQuery, graphql } from 'gatsby';
 
 import Header from './header';
-import './reset.css';
-import './layout.css';
+
+import '../styles/reset.css';
+import '../styles/layout.css';
 
 const SITE_TITLE_QUERY = graphql`
   query SiteTitleQuery {
@@ -25,7 +26,7 @@ const Layout = ({ children, splashPage }) => {
       <main className={splashPage ? 'splash' : ''}> 
         {children}
       </main>
-      <footer className="h-8 flex justify-center items-center border-t border-dotted text-xs sm:text-sm">
+      <footer className="flex justify-center items-center text-xs h-8 mt-4 sm:text-sm">
         © {new Date().getFullYear()} {title}
       </footer>
     </div>

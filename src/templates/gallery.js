@@ -66,7 +66,7 @@ const Gallery = ({ data: { gallery, images } }) => {
       <section className="gallery-photos-container">
         {images.edges.map(({ node: { name, childImageSharp } }, index) => 
           <div key={name} onClick={() => openLightBox(index)} onContextMenu={preventRightClick}>
-            <Img fluid={childImageSharp.fluid} />
+            <Img fluid={childImageSharp.fluid} imgStyle={{ objectFit: 'contain' }} />
           </div>
         )}
       </section>

@@ -45,11 +45,11 @@ module.exports = {
     {
       resolve: 'gatsby-plugin-manifest',
       options: {
-        name: 'gatsby-starter-default',
-        short_name: 'starter',
+        name: 'Amber Celeste Photography',
+        short_name: 'Amber Celeste',
         start_url: '/',
-        background_color: '#663399',
-        theme_color: '#663399',
+        background_color: '#cab558',
+        theme_color: '#cab558',
         display: 'minimal-ui',
         icon: 'src/images/camera.svg'
       },
@@ -62,9 +62,9 @@ module.exports = {
         }
       }
     },
-    'gatsby-plugin-postcss'
+    'gatsby-plugin-postcss',
     // this (optional) plugin enables Progressive Web App + Offline functionality
     // To learn more, visit: https://gatsby.dev/offline
-    // 'gatsby-plugin-offline',
+    'gatsby-plugin-offline'
   ],
 };

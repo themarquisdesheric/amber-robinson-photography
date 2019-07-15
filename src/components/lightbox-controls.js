@@ -1,9 +1,32 @@
 import React from 'react';
-import { bool, func, arrayOf, object } from 'prop-types';
+import { bool, func, arrayOf, object, string, node } from 'prop-types';
 
 import CloseIcon from '../images/Xsnakes.svg';
 import ArrowSnakeLeft from '../images/arrow-snake-left.svg';
 import ArrowSnakeRight from '../images/arrow-snake-right.svg';
+
+const LightBoxControl = ({ className = '', handleClick, handleMouseEnter, ariaText, Icon, children, styleProps = {} }) => (
+  <button 
+    className={className}
+    onClick={handleClick} 
+    onMouseEnter={handleMouseEnter}
+    style={styleProps}
+  >
+    <span role="img" aria-label={ariaText}>
+      {Icon ? <Icon /> : children}
+    </span>
+  </button>
+);
+
+LightBoxControl.propTypes = {
+  className: string,
+  handleClick: func.isRequired,
+  handleMouseEnter: func.isRequired,
+  ariaText: string.isRequired,
+  Icon: node,
+  children: node,
+  styleProps: object
+};
 
 const LightBoxControls = ({ 
   controlsVisible, 
@@ -15,41 +38,35 @@ const LightBoxControls = ({
   updateImageIndex
 }) => (
   <div className={`lightbox-controls ${controlsVisible ? 'visible' : ''}`}>
-    <button 
+    <LightBoxControl 
       className="lightbox-close"
-      onClick={closeLightBox} 
-      onMouseEnter={handleMouseEnter}
-    >
-      <CloseIcon />
-    </button>
-    <button 
+      handleClick={closeLightBox} 
+      handleMouseEnter={handleMouseEnter}
+      ariaText="close lightbox"
+      Icon={CloseIcon}
+    />
+    <LightBoxControl 
       className="lightbox-theme-toggle"
-      onClick={() => setLightTheme(!lightTheme)}
-      onMouseEnter={handleMouseEnter}
-      style={{ color: lightTheme ? light.color : dark.color }}
-    >
-      <span role="img" aria-label={`set lightbox theme ${lightTheme ? 'dark' : 'light'}`}>
-        {lightTheme ? '☾' : '🌞'}
-      </span>
-    </button>
-    <button 
+      handleClick={() => setLightTheme(!lightTheme)}
+      handleMouseEnter={handleMouseEnter}
+      ariaText={`set lightbox theme ${lightTheme ? 'dark' : 'light'}`}
+      children={lightTheme ? '☾' : '🌞'}
+      styleProps={{ color: lightTheme ? light.color : dark.color }}
+    />
+    <LightBoxControl
       className="lightbox-left-arrow"
-      onClick={() => updateImageIndex('previous')}
-      onMouseEnter={handleMouseEnter}
-    >
-      <span role="img" aria-label="previous image">
-        <ArrowSnakeLeft />
-      </span>
-    </button>
-    <button 
+      handleClick={() => updateImageIndex('previous')}
+      handleMouseEnter={handleMouseEnter}
+      ariaText="previous image"
+      Icon={ArrowSnakeLeft}
+    />
+    <LightBoxControl
       className="lightbox-right-arrow"
-      onClick={() => updateImageIndex('next')}
-      onMouseEnter={handleMouseEnter}
-    >
-      <span role="img" aria-label="next image">
-        <ArrowSnakeRight />
-      </span>
-    </button>
+      handleClick={() => updateImageIndex('next')}
+      handleMouseEnter={handleMouseEnter}
+      ariaText="next image"
+      Icon={ArrowSnakeRight}
+    />
   </div>
 );
 
