@@ -1,9 +1,10 @@
-import React, { useState, useCallback, useEffect } from 'react';
+import React, { useState, useRef, useCallback, useEffect } from 'react';
 import { number, object, func, arrayOf } from 'prop-types';
 import { useSpring, animated } from 'react-spring';
 import Img from 'gatsby-image';
 
 import LightBoxControls from './lightbox-controls';
+import lightBoxSwipe from './lightbox-swipe';
 import { preventRightClick } from '../utils';
 
 const light = {
@@ -60,26 +61,43 @@ const LightBox = ({ images, imageIndex, setImageIndex, closeLightBox }) => {
 
   const handleKeyDown = useCallback(
     ({ key }) => {
-      if (key === 'ArrowRight') {        
-        updateImageIndex('next');
-      } else if (key === 'ArrowLeft') {
-        updateImageIndex('previous');
-      } else if (key === 'Escape') {
-        closeLightBox();
+      switch(key) {
+        case 'ArrowRight':
+          updateImageIndex('next');
+          break;
+        case 'ArrowLeft':
+          updateImageIndex('previous');
+          break;
+        case 'Escape':
+          closeLightBox();
+          break;
+        default:
+          return;
       }
     },
     [imageIndex],
   );
 
-  useEffect(() => {
-    window.addEventListener('keydown', handleKeyDown);
-    
-    return () => {
-      window.removeEventListener('keydown', handleKeyDown);
+  const lightBoxRef = useRef(null);
 
-      if (timeout) clearTimeout(timeout);
-    };
-  }, [handleKeyDown]);
+  useEffect(
+    () => {
+      if (window.outerWidth < 768) {
+        const removeHandlers = lightBoxSwipe(lightBoxRef.current, updateImageIndex, closeLightBox);
+
+        return removeHandlers;
+      } else {
+        window.addEventListener('keydown', handleKeyDown, false);
+        
+        return () => {
+          window.removeEventListener('keydown', handleKeyDown);
+    
+          if (timeout) clearTimeout(timeout);
+        };
+      }
+    }, 
+    [handleKeyDown]
+  );
   
   if (imageIndex === null) return null;
 
@@ -87,6 +105,7 @@ const LightBox = ({ images, imageIndex, setImageIndex, closeLightBox }) => {
     <animated.div className="relative" style={props}>
       <article 
         className="lightbox"
+        ref={lightBoxRef}
         onMouseMove={handleMouseMove}
         onContextMenu={preventRightClick}
         style={lightTheme ? light : dark}

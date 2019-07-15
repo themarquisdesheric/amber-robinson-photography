@@ -3,8 +3,9 @@ import { node, bool } from 'prop-types';
 import { useStaticQuery, graphql } from 'gatsby';
 
 import Header from './header';
-import './reset.css';
-import './layout.css';
+
+import '../styles/reset.css';
+import '../styles/layout.css';
 
 const SITE_TITLE_QUERY = graphql`
   query SiteTitleQuery {

@@ -111,6 +111,8 @@ h1 svg { width: 125px; }
   transition: background-color .5s;
 }
 
+.lightbox-controls { display: none; }
+
 .lightbox-controls > button {
   position: fixed;
   z-index: 1000;
@@ -186,6 +188,8 @@ h1 svg { width: 125px; }
 @media all and (min-width: 768px) {
   .header,
   .layout > main { padding: 0 8rem; }
+
+  .lightbox-controls { display: block; }
 }
 
 @media all and (min-width: 1000px) {
